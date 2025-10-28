@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Home - A Lone Dinner </title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="css/simple-blog-template.css" rel="stylesheet">
+
+  <!-- HTML5 Shim and Respond.js IE8 support -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+
+    <!-- Dynamic Navbar -->
+    <div id="navbar-placeholder"></div>
+
+  <!-- Page Content -->
+  <div class="container">
+    Welcome to my Food Blog! Featuring Food Recommendations from dumb, broke, college kids.
+    
+
+<br>
+<hr>
+      <div class="col-md-12">
+
+        <!-- Categories / Tags Filter -->
+        <div id="category-filter" class="mb-3"></div>
+
+        <!-- Blog Posts -->
+        <div id="blog-posts"></div>
+
+        <hr>
+
+        <!-- Pager -->
+        <ul class="pager">
+          <li class="previous">
+            <a href="#" id="prevBtn">Prev</a>
+          </li>
+          <li class="next">
+            <a href="#" id="nextBtn">Next</a>
+          </li>
+        </ul>
+
+      </div>
+    <br>
+    <div class="row">
+      <figure>
+        <img src = "images/cartoon.png" style="width:30%">
+        <figcaption aria-setsize="7">I've heard of splitting the bill, but this is ridiculous!</figcaption>
+      </figure>
+    </div>
+    
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright &copy; Janelle 2025</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- jQuery -->
+  <script src="js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="js/bootstrap.min.js"></script>
+
+  <!-- Dynamic Blog Metadata Loader with Pagination & Tags -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const container = document.getElementById('blog-posts');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const filterContainer = document.getElementById('category-filter');
+
+      let posts = [];
+      let filteredPosts = [];
+      let currentPage = 0;
+      const postsPerPage = 5; // Change this to show more posts per page
+
+      function postHTML(post) {
+        return `
+          <h2 class="post-title">
+            <a href="${post.path}">${post.title}</a>
+          </h2>
+          <p class="lead">by ${post.author} ${post.author_jp ? '(' + post.author_jp + ')' : ''}</p>
+          <p><span class="glyphicon glyphicon-time"></span> Posted on ${post.date}</p>
+          <p>${post.excerpt}</p>
+          <p><strong>Tags:</strong> ${post.tags.join(', ')}</p>
+          <a class="btn btn-default" href="${post.path}">Read More</a>
+          <hr>
+        `;
+      }
+
+      function renderPosts() {
+        container.innerHTML = '';
+        const start = currentPage * postsPerPage;
+        const end = start + postsPerPage;
+        const visiblePosts = filteredPosts.slice(start, end);
+        visiblePosts.forEach(post => container.insertAdjacentHTML('beforeend', postHTML(post)));
+
+        prevBtn.style.visibility = currentPage === 0 ? 'hidden' : 'visible';
+        nextBtn.style.visibility = end >= filteredPosts.length ? 'hidden' : 'visible';
+      }
+
+      function generateTagButtons() {
+        const tags = new Set();
+        posts.forEach(post => post.tags.forEach(tag => tags.add(tag)));
+
+        // Add "All" button
+        filterContainer.innerHTML = '<button class="btn btn-default" data-tag="all">All</button>';
+
+        tags.forEach(tag => {
+          const btn = document.createElement('button');
+          btn.className = 'btn btn-default';
+          btn.textContent = tag;
+          btn.setAttribute('data-tag', tag);
+          filterContainer.appendChild(btn);
+        });
+
+        filterContainer.querySelectorAll('button').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const tag = btn.getAttribute('data-tag');
+            currentPage = 0;
+            filteredPosts = tag === 'all'
+              ? posts
+              : posts.filter(post => post.tags.includes(tag));
+            renderPosts();
+          });
+        });
+      }
+
+      // Load posts.json
+      fetch('data/posts.json')
+        .then(response => response.json())
+        .then(data => {
+          posts = data;
+          filteredPosts = posts;
+          generateTagButtons();
+          renderPosts();
+        })
+        .catch(err => console.error('Error loading posts:', err));
+
+      // Pager event listeners
+      prevBtn.addEventListener('click', e => {
+        e.preventDefault();
+        if (currentPage > 0) {
+          currentPage--;
+          renderPosts();
+          window.scrollTo(0, 0);
+        }
+      });
+
+      nextBtn.addEventListener('click', e => {
+        e.preventDefault();
+        if ((currentPage + 1) * postsPerPage < filteredPosts.length) {
+          currentPage++;
+          renderPosts();
+          window.scrollTo(0, 0);
+        }
+      });
+    });
+  </script>
+
+      <!-- Dynamic Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/include.js"></script>
+
+    
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+[
+    {
+    "title": "Breakfast in Atlanta",
+    "author": "J. Doe",
+    "date": "October 28, 2025",
+    "excerpt": "Moon waffles and peach cobbler.",
+    "slug": "ATL_10_27_25",
+    "path": "posts/ATL_10_27_25/breakfast.html",
+    "tags": ["Misc."]
+  },
+  {
+    "title": "Testing, Testing...",
+    "author": "J. Doe",
+    "date": "October 27, 2025",
+    "excerpt": "Is this thing on?",
+    "slug": "ATL_10_27_25",
+    "path": "posts/ATL_10_27_25/post.html",
+    "tags": ["Misc."]
+  },
+  {
+    "title": "Yokohama",
+    "author": "J. Doe",
+    "date": "June 2024",
+    "excerpt": "Home to the futuristic pier.",
+    "slug": "Japan",
+    "path": "posts/Yokohama/post.html",
+    "tags": ["Japan"]
+  },
+  {
+    "title": "Maruka",
+    "author": "J. Doe",
+    "date": "May 2024",
+    "excerpt": "I promise I can talk about more than just that one summer I spent in Japan.",
+    "slug": "Japan",
+    "path": "posts/Chiyoda/post.html",
+    "tags": ["Japan"]
+  },
+    {
+    "title": "Harajuku and Friends",
+    "author": "J. Doe",
+    "date": "May 2024",
+    "excerpt": "Fashion Street Bites.",
+    "slug": "Japan",
+    "path": "posts/Harajuku/post.html",
+    "tags": ["Japan"]
+  },
+  {
+    "title": "Asakusa",
+    "author": "J. Doe",
+    "date": "May 2024",
+    "excerpt": "Recommendations for milk and candy apples.",
+    "slug": "Japan",
+    "path": "posts/Asakusa/post.html",
+    "tags": ["Japan"]
+  }
+]
