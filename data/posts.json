@@ -1,5 +1,14 @@
 [
     {
+    "title": "Asheville Highlights",
+    "author": "J. Doe",
+    "date": "December 27, 2025",
+    "excerpt": "Featuring The Glass Onion and Early Girl Eatery",
+    "slug": "glass_onion",
+    "path": "posts/glass_onion/post.html",
+    "tags": ["Misc."]
+  },
+    {
     "title": "Breakfast in Atlanta",
     "author": "J. Doe",
     "date": "October 28, 2025",
